@@ -1,450 +1,642 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Aivora — Inteligência Artificial Brasileira</title>
+<title>Aivora — Inteligência Artificial Brasileira</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      background: #09090b;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
+body {
+  background: #09090b;
+  color: white;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
 
-    button {
-      font-family: inherit;
-      cursor: pointer;
-    }
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
 
-    /* TELAS */
-    .tela {
-      display: none;
-      min-height: 100vh;
-      padding: 20px;
-    }
+/* TODAS AS TELAS */
+.tela {
+  display: none;
+  min-height: 100vh;
+}
 
-    .tela.ativa {
-      display: flex;
-    }
+.tela.ativa {
+  display: flex;
+}
 
-    /* LOGIN */
-    #login {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+/* LOGIN */
+#login {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
 
-    .idioma {
-      position: absolute;
-      top: 25px;
-      right: 20px;
-      color: #bdbdbd;
-      font-size: 14px;
-    }
+.idioma {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  color: #aaa;
+  font-size: 13px;
+}
 
-    /* LOGO OFICIAL */
-    .logo {
-      width: 150px;
-      height: 150px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 25px;
-    }
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-    h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
 
-    .frase {
-      color: #a1a1aa;
-      margin-bottom: 40px;
-      max-width: 300px;
-      line-height: 1.5;
-    }
+.frase {
+  color: #aaa;
+  max-width: 320px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
 
-    .botoes-login {
-      width: 100%;
-      max-width: 350px;
-    }
+.botoes-login {
+  width: 100%;
+  max-width: 360px;
+}
 
-    .botao-login {
-      width: 100%;
-      padding: 16px;
-      margin: 8px 0;
-      border-radius: 14px;
-      border: 1px solid #303038;
-      background: #18181b;
-      color: white;
-      font-size: 16px;
-    }
+.botao-login {
+  width: 100%;
+  padding: 16px;
+  margin: 7px 0;
+  border-radius: 14px;
+  border: 1px solid #333;
+  background: #18181b;
+  color: white;
+  font-size: 16px;
+}
 
-    .botao-login:hover {
-      background: #27272a;
-    }
+.convidado {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  border: none;
+}
 
-    .convidado {
-      background: #7c3aed;
-      border: none;
-    }
+.aviso {
+  margin-top: 30px;
+  max-width: 350px;
+  color: #666;
+  font-size: 11px;
+  line-height: 1.6;
+}
 
-    .aviso {
-      position: absolute;
-      bottom: 25px;
-      max-width: 350px;
-      font-size: 11px;
-      color: #71717a;
-      line-height: 1.6;
-      padding: 0 20px;
-    }
+/* TELA PRINCIPAL */
+#principal {
+  flex-direction: column;
+}
 
-    /* TELA PRINCIPAL */
-    #principal {
-      flex-direction: column;
-      padding: 0;
-    }
+.topo {
+  height: 65px;
+  background: #111114;
+  border-bottom: 1px solid #29292f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
 
-    .topo {
-      height: 65px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 18px;
-      border-bottom: 1px solid #27272a;
-      background: #111114;
-    }
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .marca {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.mini-logo {
+  width: 38px;
+  height: 38px;
+}
 
-    /* MINI LOGO */
-    .mini-logo {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.mini-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-    .mini-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 10px;
-    }
+.menu-botoes button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 21px;
+  padding: 8px;
+}
 
-    .menu-botoes button {
-      background: transparent;
-      color: white;
-      border: none;
-      font-size: 20px;
-      padding: 8px;
-    }
+.conversa {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
 
-    .conversa {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      overflow-y: auto;
-    }
+.boas-vindas {
+  text-align: center;
+  margin-top: 120px;
+}
 
-    .boas-vindas {
-      text-align: center;
-    }
+.boas-vindas h2 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
 
-    .boas-vindas h2 {
-      font-size: 25px;
-      margin-bottom: 10px;
-    }
+.boas-vindas p {
+  color: #aaa;
+}
 
-    .boas-vindas p {
-      color: #a1a1aa;
-    }
+.mensagem {
+  width: 100%;
+  max-width: 700px;
+  margin: 10px auto;
+  padding: 15px;
+  background: #18181b;
+  border-radius: 15px;
+  line-height: 1.5;
+}
 
-    .mensagem {
-      width: 100%;
-      max-width: 700px;
-      margin: 8px auto;
-      padding: 14px;
-      border-radius: 14px;
-      background: #18181b;
-      line-height: 1.5;
-    }
+.usuario {
+  background: #3b1d63;
+}
 
-    .mensagem.usuario {
-      background: #3b1d63;
-    }
+/* ÁREA DE MENSAGEM */
+.area-mensagem {
+  background: #111114;
+  border-top: 1px solid #29292f;
+  padding: 12px;
+}
 
-    .area-mensagem {
-      padding: 15px;
-      border-top: 1px solid #27272a;
-      background: #111114;
-    }
+.caixa-envio {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px;
+  background: #1c1c21;
+  border: 1px solid #333;
+  border-radius: 18px;
+}
 
-    .caixa-envio {
-      max-width: 700px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #1c1c21;
-      border: 1px solid #303038;
-      border-radius: 18px;
-      padding: 8px;
-    }
+.caixa-envio input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+}
 
-    .caixa-envio input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: white;
-      padding: 10px;
-      font-size: 16px;
-    }
+.icone-botao {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  background: #29292f;
+  color: white;
+  font-size: 18px;
+}
 
-    .icone-botao {
-      border: none;
-      background: #29292f;
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      font-size: 18px;
-    }
+.enviar {
+  background: #7c3aed;
+}
 
-    .enviar {
-      background: #7c3aed;
-    }
+/* PÁGINAS SECUNDÁRIAS */
+.pagina {
+  flex-direction: column;
+  padding: 20px;
+}
 
-    /* TELAS SECUNDÁRIAS */
-    .pagina {
-      flex-direction: column;
-      padding: 20px;
-    }
+.voltar {
+  width: fit-content;
+  background: #18181b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
 
-    .voltar {
-      background: #18181b;
-      border: none;
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      width: fit-content;
-      margin-bottom: 25px;
-    }
+.opcao {
+  width: 100%;
+  text-align: left;
+  background: #18181b;
+  color: white;
+  border: 1px solid #303038;
+  padding: 18px;
+  margin-top: 10px;
+  border-radius: 14px;
+  font-size: 16px;
+}
 
-    .opcao {
-      background: #18181b;
-      border: 1px solid #29292f;
-      padding: 18px;
-      margin-top: 10px;
-      border-radius: 14px;
-      color: white;
-    }
-  </style>
+/* PLANOS */
+.plano {
+  background: #18181b;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.plano h3 {
+  margin-bottom: 8px;
+}
+
+.plano p {
+  color: #aaa;
+  line-height: 1.5;
+}
+
+.plano-destaque {
+  border: 2px solid #7c3aed;
+}
+
+/* REDAÇÃO */
+.editor-redacao {
+  width: 100%;
+  min-height: 300px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #18181b;
+  border: 1px solid #333;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  resize: vertical;
+}
+
+/* GALERIA */
+.galeria-vazia {
+  margin-top: 20px;
+  padding: 30px;
+  text-align: center;
+  background: #18181b;
+  border: 1px dashed #555;
+  border-radius: 15px;
+  color: #aaa;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- TELA DE LOGIN -->
-  <section id="login" class="tela ativa">
+<!-- LOGIN -->
+<section id="login" class="tela ativa">
 
-    <div class="idioma">🇧🇷 Português (Brasil)</div>
+  <div class="idioma">🇧🇷 Português (Brasil)</div>
 
-    <!-- LOGO OFICIAL DA AIVORA -->
-    <div class="logo">
-      <img src="file_000000004e84820ea724b818ddcca3a4.png" alt="Logo Aivora">
+  <div class="logo">
+    <img src="file_000000004e84820ea724b818ddcca3a4.png" alt="Logo Aivora">
+  </div>
+
+  <h1>Aivora</h1>
+
+  <p class="frase">
+    Sua inteligência artificial, sempre ao seu lado.
+  </p>
+
+  <div class="botoes-login">
+    <button class="botao-login" onclick="entrar()">
+      Continuar com Google
+    </button>
+
+    <button class="botao-login" onclick="entrar()">
+      Continuar com Facebook
+    </button>
+
+    <button class="botao-login convidado" onclick="entrar()">
+      Continuar como convidado
+    </button>
+  </div>
+
+  <div class="aviso">
+    Ao continuar, você concorda com os Termos de Uso.<br>
+    Consulte nossa Política de Privacidade.<br>
+    O Aivora pode cometer erros. Confira informações importantes.
+  </div>
+
+</section>
+
+<!-- PRINCIPAL -->
+<section id="principal" class="tela">
+
+<header class="topo">
+
+  <div class="marca">
+    <div class="mini-logo">
+      <img src="file_000000004e84820ea724b818ddcca3a4.png" alt="Aivora">
     </div>
+    Aivora
+  </div>
 
-    <h1>Aivora</h1>
+  <div class="menu-botoes">
+    <button onclick="novaConversa()" title="Nova conversa">＋</button>
+    <button onclick="mostrarTela('historico')" title="Histórico">☷</button>
+    <button onclick="mostrarTela('configuracoes')" title="Configurações">⚙</button>
+  </div>
 
-    <p class="frase">
-      Sua inteligência artificial, sempre ao seu lado.
-    </p>
+</header>
 
-    <div class="botoes-login">
-      <button class="botao-login" onclick="entrar()">
-        Continuar com Google
-      </button>
+<main id="conversa" class="conversa">
 
-      <button class="botao-login" onclick="entrar()">
-        Continuar com Facebook
-      </button>
+  <div id="boasVindas" class="boas-vindas">
+    <h2>Como posso ajudar você hoje?</h2>
+    <p>Converse com a Aivora e explore suas ideias.</p>
+  </div>
 
-      <button class="botao-login convidado" onclick="entrar()">
-        Continuar como convidado
-      </button>
+</main>
+
+<div class="area-mensagem">
+
+  <div class="caixa-envio">
+
+    <button class="icone-botao" onclick="selecionarArquivo()" title="Enviar arquivo">📎</button>
+
+    <input id="arquivo" type="file" hidden
+      accept="image/*,.pdf,.doc,.docx,.txt">
+
+    <input
+      id="mensagem"
+      type="text"
+      placeholder="Pergunte qualquer coisa..."
+      onkeydown="if(event.key === 'Enter') enviarMensagem()"
+    >
+
+    <button class="icone-botao" onclick="falar()" title="Falar">🎤</button>
+
+    <button class="icone-botao enviar" onclick="enviarMensagem()" title="Enviar">
+      ↑
+    </button>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- HISTÓRICO -->
+<section id="historico" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('principal')">← Voltar</button>
+
+<h2>💬 Histórico de conversas</h2>
+
+<div id="listaHistorico">
+  <div class="opcao">
+    Nenhuma conversa salva ainda.
+  </div>
+</div>
+
+</section>
+
+<!-- CONFIGURAÇÕES -->
+<section id="configuracoes" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('principal')">← Voltar</button>
+
+<h2>⚙️ Configurações</h2>
+
+<button class="opcao" onclick="mostrarTela('perfil')">👤 Perfil e conta</button>
+<button class="opcao" onclick="mostrarTela('planos')">⭐ Minha assinatura e planos</button>
+<button class="opcao" onclick="mostrarTela('redacao')">📝 Área de Redação ENEM</button>
+<button class="opcao" onclick="mostrarTela('imagens')">🖼️ Criar imagens e galeria</button>
+<button class="opcao">🌐 Idioma — Português (Brasil)</button>
+<button class="opcao" onclick="alert('As configurações de privacidade serão conectadas ao servidor.')">🔒 Privacidade e segurança</button>
+<button class="opcao">❓ Ajuda e suporte</button>
+
+</section>
+
+<!-- PERFIL -->
+<section id="perfil" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('configuracoes')">← Voltar</button>
+
+<h2>👤 Meu perfil</h2>
+
+<div class="opcao">Nome: Usuário Aivora</div>
+<div class="opcao">Tipo de conta: Convidado</div>
+
+</section>
+
+<!-- PLANOS -->
+<section id="planos" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('configuracoes')">← Voltar</button>
+
+<h2>⭐ Planos Aivora</h2>
+
+<div class="plano">
+  <h3>Gratuito</h3>
+  <p>Use os recursos básicos do Aivora.</p>
+</div>
+
+<div class="plano plano-destaque">
+  <h3>Plus</h3>
+  <p>Mais recursos, mais mensagens e ferramentas avançadas.</p>
+</div>
+
+<div class="plano">
+  <h3>Premium</h3>
+  <p>A experiência completa do Aivora com recursos exclusivos.</p>
+</div>
+
+</section>
+
+<!-- REDAÇÃO ENEM -->
+<section id="redacao" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('configuracoes')">← Voltar</button>
+
+<h2>📝 Redação ENEM</h2>
+
+<p style="color:#aaa; margin-top:10px;">
+  Escreva sua redação. Futuramente a inteligência artificial poderá analisar e ajudar a melhorar seu texto.
+</p>
+
+<textarea class="editor-redacao" placeholder="Comece a escrever sua redação aqui..."></textarea>
+
+</section>
+
+<!-- IMAGENS -->
+<section id="imagens" class="tela pagina">
+
+<button class="voltar" onclick="mostrarTela('configuracoes')">← Voltar</button>
+
+<h2>🖼️ Imagens Aivora</h2>
+
+<button class="opcao" onclick="criarImagem()">
+  ✨ Criar uma nova imagem
+</button>
+
+<div class="galeria-vazia" id="galeria">
+  Sua galeria de imagens aparecerá aqui.
+</div>
+
+</section>
+
+<script>
+
+let historico = [];
+
+function mostrarTela(id) {
+  document.querySelectorAll(".tela").forEach(function(tela) {
+    tela.classList.remove("ativa");
+  });
+
+  document.getElementById(id).classList.add("ativa");
+}
+
+function entrar() {
+  mostrarTela("principal");
+}
+
+function novaConversa() {
+  const conversa = document.getElementById("conversa");
+
+  conversa.innerHTML = `
+    <div id="boasVindas" class="boas-vindas">
+      <h2>Nova conversa</h2>
+      <p>Como posso ajudar você hoje?</p>
     </div>
+  `;
 
-    <div class="aviso">
-      Ao continuar, você concorda com os Termos de Uso.<br>
-      Consulte nossa Política de Privacidade.<br>
-      O Aivora pode cometer erros. Confira informações importantes.
-    </div>
+  mostrarTela("principal");
+}
 
-  </section>
+function enviarMensagem() {
 
-  <!-- TELA PRINCIPAL -->
-  <section id="principal" class="tela">
+  const input = document.getElementById("mensagem");
+  const texto = input.value.trim();
 
-    <header class="topo">
-      <div class="marca">
+  if (!texto) return;
 
-        <!-- MINI LOGO DA AIVORA -->
-        <div class="mini-logo">
-          <img src="file_000000004e84820ea724b818ddcca3a4.png" alt="Aivora">
-        </div>
+  const conversa = document.getElementById("conversa");
+  const boasVindas = document.getElementById("boasVindas");
 
-        Aivora
-      </div>
+  if (boasVindas) {
+    boasVindas.remove();
+  }
 
-      <div class="menu-botoes">
-        <button onclick="mostrarTela('historico')" title="Histórico">☷</button>
-        <button onclick="mostrarTela('configuracoes')" title="Configurações">⚙</button>
-      </div>
-    </header>
+  const mensagemUsuario = document.createElement("div");
+  mensagemUsuario.className = "mensagem usuario";
+  mensagemUsuario.innerHTML = "<strong>Você:</strong> " + texto;
 
-    <main id="conversa" class="conversa">
+  conversa.appendChild(mensagemUsuario);
 
-      <div id="boasVindas" class="boas-vindas">
-        <h2>Como posso ajudar você hoje?</h2>
-        <p>Converse com a Aivora e explore suas ideias.</p>
-      </div>
+  historico.push(texto);
+  atualizarHistorico();
 
-    </main>
+  input.value = "";
 
-    <div class="area-mensagem">
-      <div class="caixa-envio">
+  setTimeout(function() {
 
-        <button class="icone-botao" title="Anexar arquivo">＋</button>
+    const resposta = document.createElement("div");
+    resposta.className = "mensagem";
+    resposta.innerHTML =
+      "<strong>Aivora:</strong> Recebi sua mensagem! A inteligência artificial real será conectada ao Aivora na próxima etapa.";
 
-        <input
-          id="mensagem"
-          type="text"
-          placeholder="Pergunte qualquer coisa..."
-          onkeydown="if(event.key === 'Enter') enviarMensagem()"
-        >
+    conversa.appendChild(resposta);
+    conversa.scrollTop = conversa.scrollHeight;
 
-        <button class="icone-botao" title="Falar">🎤</button>
+  }, 500);
 
-        <button class="icone-botao enviar" onclick="enviarMensagem()" title="Enviar">
-          ↑
-        </button>
+  conversa.scrollTop = conversa.scrollHeight;
+}
 
-      </div>
-    </div>
+function atualizarHistorico() {
 
-  </section>
+  const lista = document.getElementById("listaHistorico");
 
-  <!-- HISTÓRICO -->
-  <section id="historico" class="tela pagina">
+  if (historico.length === 0) {
+    lista.innerHTML = '<div class="opcao">Nenhuma conversa salva ainda.</div>';
+    return;
+  }
 
-    <button class="voltar" onclick="mostrarTela('principal')">← Voltar</button>
+  lista.innerHTML = "";
 
-    <h2>Histórico de conversas</h2>
+  historico.forEach(function(item, index) {
 
-    <div class="opcao">
-      Suas conversas aparecerão aqui quando o histórico estiver conectado ao servidor.
-    </div>
+    const conversa = document.createElement("div");
+    conversa.className = "opcao";
+    conversa.innerHTML = "💬 Conversa " + (index + 1) + "<br><small>" + item + "</small>";
 
-  </section>
+    lista.appendChild(conversa);
 
-  <!-- CONFIGURAÇÕES -->
-  <section id="configuracoes" class="tela pagina">
+  });
+}
 
-    <button class="voltar" onclick="mostrarTela('principal')">← Voltar</button>
+function selecionarArquivo() {
+  document.getElementById("arquivo").click();
+}
 
-    <h2>Configurações</h2>
+document.getElementById("arquivo").addEventListener("change", function() {
 
-    <div class="opcao">🌐 Idioma — Português (Brasil)</div>
-    <div class="opcao">👤 Minha conta</div>
-    <div class="opcao">⭐ Minha assinatura</div>
-    <div class="opcao">🖼 Galeria de imagens</div>
-    <div class="opcao">🔒 Privacidade e segurança</div>
-    <div class="opcao">📄 Política de Privacidade</div>
-    <div class="opcao">❓ Ajuda e suporte</div>
+  if (this.files.length > 0) {
+    alert("Arquivo selecionado: " + this.files[0].name);
+  }
 
-  </section>
+});
 
-  <script>
+function falar() {
 
-    function mostrarTela(id) {
-      document.querySelectorAll(".tela").forEach(tela => {
-        tela.classList.remove("ativa");
-      });
+  if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
 
-      document.getElementById(id).classList.add("ativa");
-    }
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    function entrar() {
-      mostrarTela("principal");
-    }
+    const reconhecimento = new SpeechRecognition();
 
-    function enviarMensagem() {
-      const input = document.getElementById("mensagem");
-      const texto = input.value.trim();
+    reconhecimento.lang = "pt-BR";
 
-      if (!texto) return;
+    reconhecimento.onresult = function(event) {
+      document.getElementById("mensagem").value =
+        event.results[0][0].transcript;
+    };
 
-      const conversa = document.getElementById("conversa");
-      const boasVindas = document.getElementById("boasVindas");
+    reconhecimento.start();
 
-      if (boasVindas) {
-        boasVindas.remove();
-      }
+  } else {
+    alert("O reconhecimento de voz não é compatível com este navegador.");
+  }
 
-      const mensagemUsuario = document.createElement("div");
-      mensagemUsuario.className = "mensagem usuario";
+}
 
-      mensagemUsuario.innerHTML =
-        "<strong>Você:</strong> " + texto;
+function criarImagem() {
 
-      conversa.appendChild(mensagemUsuario);
+  alert(
+    "O criador de imagens está sendo preparado! Na próxima etapa vamos conectar esta função a uma inteligência artificial de geração de imagens."
+  );
 
-      input.value = "";
+}
 
-      setTimeout(() => {
-        const resposta = document.createElement("div");
-        resposta.className = "mensagem";
-
-        resposta.innerHTML =
-          "<strong>Aivora:</strong> Olá! Esta é a primeira versão de teste do Aivora. Em breve estarei conectada à inteligência artificial do servidor.";
-
-        conversa.appendChild(resposta);
-        conversa.scrollTop = conversa.scrollHeight;
-
-      }, 500);
-
-      conversa.scrollTop = conversa.scrollHeight;
-    }
-
-  </script>
+</script>
 
 </body>
 </html>
